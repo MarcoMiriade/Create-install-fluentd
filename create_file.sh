@@ -30,7 +30,7 @@ do
 echo "<source>
  @type tail
   path ${dirs[i]}
-  tag ${paths[i]:1}.log
+  tag ${paths[i]:1}
   pos_file /var/log/td-agent/${paths[i]:1}.log
   
   <parse>
@@ -38,7 +38,7 @@ echo "<source>
   </parse>
 </source>
 
-<filter instance.log>
+<filter ${paths[i]:1}>
   @type ec2_metadata
 
   metadata_refresh_seconds 3000
@@ -53,11 +53,11 @@ echo "<source>
     vpc_id        \${vpc_id}
     ami_id        \${image_id}
     account_id    \${account_id}
-	referente     \${tagset_refente}
+	  referente     \${tagset_referente}
   </record>
 </filter>
 
-<match instance.log>
+<match ${paths[i]:1}>
   @type cloudwatch_logs
   log_group_name staging-fluentd-apps-logs
   log_stream_name ${paths[i]:1}
