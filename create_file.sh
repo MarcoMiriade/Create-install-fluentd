@@ -37,6 +37,9 @@ echo "<source>
   @type none
   </parse>
 </source>
+<filter ${paths[i]:1}>
+  @type stdout
+</filter>
 
 <filter ${paths[i]:1}>
   @type ec2_metadata
