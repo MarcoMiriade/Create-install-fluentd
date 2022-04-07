@@ -1,5 +1,5 @@
 #!/bin/bash
-[ ! -d "/var/td-agent/" ] && mkdir /var/td-agent/
+[ ! -d "/usr/td-agent/" ] && mkdir /usr/td-agent/
 echo "/var/log/dmesg
 /var/log/messages
 /var/log/secure
@@ -17,8 +17,8 @@ echo "/var/log/dmesg
 /usr/local/HC/HCNDR/mgr/journal.log
 /usr/local/HC/HCNDR/csp/bin/CSP.log
 /usr/local/HC/HCNDR/mgr/ensinstall.\*
-/usr/local/HC/HCNDR/mgr/HS.Util.Installe" > /var/td-agent/directories.list
-file="/var/td-agent/directories.list"
+/usr/local/HC/HCNDR/mgr/HS.Util.Installe" > /usr/td-agent/directories.list
+file="/usr/td-agent/directories.list"
 fileReadDir=$(cat "$file")
 fileReadPath=$(cat "$file")
 lines=$(echo "$fileReadDir" | wc -l)
