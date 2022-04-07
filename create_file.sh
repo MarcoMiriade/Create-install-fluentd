@@ -37,6 +37,7 @@ echo "<source>
   @type none
   </parse>
 </source>
+
 <filter ${paths[i]:1}>
   @type stdout
 </filter>
@@ -66,5 +67,5 @@ echo "<source>
   log_stream_name ${paths[i]:1}
   auto_create_stream true 
   region eu-central-1
-</match>" > /etc/td-agent/${paths[i]:1}.conf
+</match>" > /etc/td-agent/conf.d/${paths[i]:1}.conf
 done

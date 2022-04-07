@@ -48,16 +48,17 @@ sudo rm -R /etc/td-agent/
 sudo rm -R /usr/td-agent/
 [ ! -d "/usr/td-agent/" ] && sudo mkdir /usr/td-agent/
 [ ! -d "/etc/td-agent/" ] && sudo mkdir /etc/td-agent/
+[ ! -d "/etc/td-agent/conf.d/" ] && sudo mkdir /etc/td-agent/conf.d/
 
 sudo echo "systemctl stop td-agent;
 git clone https://github.com/MarcoMiriade/Create-install-fluentd /usr/td-agent/install/;
 sudo bash /usr/td-agent/install/create_file.sh;
 touch /etc/td-agent/td-agent.conf;
-lista=(\$(ls /etc/td-agent/));
-count=\$(ls /etc/td-agent/ | wc -l);
+lista=(\$(ls /etc/td-agent/conf.d/));
+count=\$(ls /etc/td-agent/conf.d/ | wc -l);
 for((i=0; i<count; i++))
 do
-echo \"@include /\${lista[\$i]}\" >> /etc/td-agent/td-agent.conf;
+echo \"@include conf.d/\${lista[\$i]}\" >> /etc/td-agent/td-agent.conf;
 done
 systemctl restart td-agent" > /usr/td-agent/install-dir.sh
 
@@ -68,11 +69,11 @@ touch /etc/td-agent/td-agent.conf;
 cd /usr/td-agent/install/;
 git pull https://github.com/MarcoMiriade/Create-install-fluentd;
 sudo bash /usr/td-agent/install/create_file.sh;
-lista=(\$(ls /etc/td-agent/));
-count=\$(ls /etc/td-agent/ | wc -l);
+lista=(\$(ls /etc/td-agent/conf.d/));
+count=\$(ls /etc/td-agent/conf.d/ | wc -l);
 for((i=0; i<count; i++))
 do
-  echo \"@include /\${lista[\$i]}\" >> /etc/td-agent/td-agent.conf
+  echo \"@include conf.d/\${lista[\$i]}\" >> /etc/td-agent/td-agent.conf
 done" > /usr/td-agent/refresh-dir.sh
 
 sudo bash /usr/td-agent/install-dir.sh
