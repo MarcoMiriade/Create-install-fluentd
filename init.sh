@@ -49,6 +49,13 @@ sudo rm -R /usr/td-agent/
 [ ! -d "/usr/td-agent/" ] && sudo mkdir /usr/td-agent/
 [ ! -d "/etc/td-agent/" ] && sudo mkdir /etc/td-agent/
 [ ! -d "/etc/td-agent/conf.d/" ] && sudo mkdir /etc/td-agent/conf.d/
+[ ! -d "/usr/td-agent/" ] && sudo mkdir /usr/td-agent
+[ ! -f "/usr/td-agent/" ] && sudo touch /usr/td-agent/install-dir.sh
+[ ! -f "/usr/td-agent/" ] && sudo touch /usr/td-agent/refresh-dir.sh
+sudo chmod 777 /usr/td-agent/install-dir.sh
+sudo chmod 777 /usr/td-agent/refresh-dir.sh
+
+
 
 sudo echo "systemctl stop td-agent;
 git clone https://github.com/MarcoMiriade/config-directories /usr/td-agent/install/;
@@ -60,7 +67,7 @@ for((i=0; i<count; i++))
 do
 echo \"@include conf.d/\${lista[\$i]}\" >> /etc/td-agent/td-agent.conf;
 done
-systemctl restart td-agent" > /usr/td-agent/install-dir.sh
+systemctl restart td-agent" >> /usr/td-agent/install-dir.sh
 
 
 sudo echo "systemctl stop td-agent;
@@ -74,7 +81,7 @@ count=\$(ls /etc/td-agent/conf.d/ | wc -l);
 for((i=0; i<count; i++))
 do
   echo \"@include conf.d/\${lista[\$i]}\" >> /etc/td-agent/td-agent.conf
-done" > /usr/td-agent/refresh-dir.sh
+done" >> /usr/td-agent/refresh-dir.sh
 
 sudo bash /usr/td-agent/install-dir.sh
 sudo bash /usr/td-agent/refresh-dir.sh
